@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Artigo, Sentenca, Palavra
+from .models import Artigo,  Palavra
 
 class ArtigoSerializer(serializers.ModelSerializer):
 
@@ -9,12 +9,6 @@ class ArtigoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SentencaSerializer(serializers.ModelSerializer):
-
-    class Meta:
-
-        model = Sentenca
-        fields = '__all__'
 
 class PalavraSerializer(serializers.ModelSerializer):
 
@@ -22,3 +16,4 @@ class PalavraSerializer(serializers.ModelSerializer):
 
         model = Palavra
         fields = '__all__'
+        depth = 1

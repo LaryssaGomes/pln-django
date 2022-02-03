@@ -1,22 +1,21 @@
 from django.urls import include, path
 from rest_framework import serializers
 from . import views
-from .models import Artigo
+
+from .models import Artigo, Palavra
 from rest_framework import viewsets, routers
 
 
-class ArtigoSerializer(serializers.ModelSerializer):
+class PalavraSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Artigo
+        model = Palavra
         fields = '__all__'
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = Artigo.objects.all()
-    serializer_class = ArtigoSerializer
+    queryset = Palavra.objects.select_related()
+    serializer_class = PalavraSerializer
 
-
-    
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -25,5 +24,6 @@ router.register(r'artigo', UserViewSet)
 
 urlpatterns = [
    path('artigo/', include(router.urls)),
-   path('artigo/m embers2', views.member_api),
+   path('artigo/salvando', views.member_api),
+   path('artigo/list', views.lista_artigos_palavras),
 ]
